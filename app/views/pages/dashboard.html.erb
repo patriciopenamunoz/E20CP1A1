@@ -1,2 +1,31 @@
-<h1>Pages#dashboard</h1>
-<p>Find me in app/views/pages/dashboard.html.erb</p>
+<h1>Dashboard</h1>
+<p>Grant or revoke permissions</p>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Email</th>
+      <th>¿Es admin?</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin? ? 'Sí' : 'No' %></td>
+        <td>
+          <%= link_to "#{user.admin? ? 'Revocar privilegio' : 'Conceder admin'}",
+                      pages_grant_path(user),
+                      method: :patch,
+                      class: "btn btn-sm #{user.admin? ? 'btn-danger' : 'btn-success'}" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'pages/dashboard'
+  patch '/pages/dashboard/:id/', to: 'pages#grant', as: 'pages_grant'
 
 	resources :posts do
 		resources :comments, only: [:create, :destroy]

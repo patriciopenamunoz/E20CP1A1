@@ -4,10 +4,11 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
-      can :read, :all
+      can :read, [Comment, Post]
       if user.present?
         if user.admin?
           can :manage, :all
+          can [:dashboard, :grant], :pages
         else
           can :create, Comment
           can :destroy, Comment, user_id: user.id
